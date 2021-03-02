@@ -30,4 +30,18 @@ public class PlayerMovement : MonoBehaviour
 
         rb.AddForce(movement * speed);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("score"))
+        {
+            other.gameObject.SetActive(false);
+            Debug.Log("Score!");
+        }
+        if (other.gameObject.CompareTag("enemy"))
+        {
+            other.gameObject.SetActive(false);
+            Debug.Log("You lose");
+        }
+    }
 }
