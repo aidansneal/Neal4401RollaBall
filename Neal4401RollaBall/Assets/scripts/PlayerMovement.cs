@@ -9,11 +9,15 @@ public class PlayerMovement : MonoBehaviour
     private float movementX;
     private float movementY;
     public Rigidbody rb;
+    public bool gameOver = false;
+    public GameObject winTextObject;
+    public GameObject loseTextObject;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        winTextObject.SetActive(false);
+        loseTextObject.SetActive(false);
     }
     void OnMove(InputValue movementValue)
     {
@@ -33,15 +37,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //score collision
         if (other.gameObject.CompareTag("score"))
         {
             other.gameObject.SetActive(false);
             Debug.Log("Score!");
+            winTextObject.SetActive(true);
         }
-        if (other.gameObject.CompareTag("enemy"))
+
+        if (other.gameObject.CompareTag("enemy")) 
         {
-            other.gameObject.SetActive(false);
-            Debug.Log("You lose");
+            loseTextObject.SetActive(true);
         }
+     
     }
 }
